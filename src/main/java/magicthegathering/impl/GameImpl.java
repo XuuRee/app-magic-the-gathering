@@ -129,14 +129,19 @@ public class GameImpl implements Game {
     @Override
     public void performBlockAndDamage(CreatureCard[] attackingCreatures, CreatureCard[] blockingCreatures) {
         for (int i = 0; i < attackingCreatures.length; i++) {
-            if (blockingCreatures[i] == null) {
-                getSecondPlayer().subtractLives(attackingCreatures[i].getPower());
-            } else {
-                if (attackingCreatures[i].getPower() >= blockingCreatures[i].getToughness()) {
-                    getSecondPlayer().destroyCreature(blockingCreatures[i]);
-                } else {
-                    getCurrentPlayer().destroyCreature(attackingCreatures[i]);
-                }
+            CreatureCard attackCreature = attackingCreatures[i];
+            CreatureCard blockCreature = blockingCreatures[i]; 
+            if (blockCreature == null) {
+                getSecondPlayer().subtractLives(attackCreature.getPower());
+                break;
+            } 
+            if (attackCreature.getPower() >= blockCreature.getToughness() && attackCreature.getPower() != 0) {
+                getSecondPlayer().destroyCreature(blockCreature);
+                break;
+            }
+            if (blockCreature.getPower() >= attackCreature.getToughness() && blockCreature.getPower() != 0) {
+                getCurrentPlayer().destroyCreature(attackCreature);
+                break;
             }
         }
     }
