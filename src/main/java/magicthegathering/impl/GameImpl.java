@@ -84,6 +84,9 @@ public class GameImpl implements Game {
         CreatureCard[] playerCreatures = getCurrentPlayer().getCreaturesOnTable(); 
         
         for (CreatureCard card : attackingCreatures) {
+            if (card.isTapped()) {
+                return false;
+            }
             if (card.hasSummoningSickness()) {     
                 return false;
             }
