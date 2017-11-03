@@ -4,7 +4,7 @@
 
 1. Balicek ```magicthegathering``` obsahuje main
 2. Balicek ```magicthegathering.game``` obsahuje tridy a rozhrani
-3. Package  ```magicthegathering.impl``` obsahuje implementaci
+3. Balicek ```magicthegathering.impl``` obsahuje implementaci
 
 ## Kompilace projektu
 ```bash
