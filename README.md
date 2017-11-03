@@ -7,13 +7,15 @@
 3. Package  ```magicthegathering.impl``` obsahuje implementaci
 
 ## Kompilace projektu
-
 ```bash
 mvn clean install -Dcheckstyle.fail=true
 ```
 
-Testy v `target/site/jacoco/index.html`.
+## Testy
+```bash
+target/site/jacoco/index.html
+```
 
 ## Pravidla hry Magic the Gathering
 
-V [složce `doc` najdete prirucku s popisem pravidel hry](doc/MagicTheGathering-QuickStartGuide.pdf).
+V [složce doc najdete prirucku s popisem pravidel hry](doc/MagicTheGathering-QuickStartGuide.pdf).
