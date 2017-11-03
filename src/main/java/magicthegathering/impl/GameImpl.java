@@ -133,15 +133,15 @@ public class GameImpl implements Game {
             CreatureCard blockCreature = blockingCreatures[i]; 
             if (blockCreature == null) {
                 getSecondPlayer().subtractLives(attackCreature.getPower());
-                break;
+                continue;
             } 
             if (attackCreature.getPower() >= blockCreature.getToughness() && attackCreature.getPower() != 0) {
                 getSecondPlayer().destroyCreature(blockCreature);
-                break;
+                continue;
             }
             if (blockCreature.getPower() >= attackCreature.getToughness() && blockCreature.getPower() != 0) {
                 getCurrentPlayer().destroyCreature(attackCreature);
-                break;
+                continue;
             }
         }
     }
