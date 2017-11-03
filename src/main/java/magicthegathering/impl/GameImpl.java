@@ -75,8 +75,15 @@ public class GameImpl implements Game {
         }
     }
 
-    @Override
-    public boolean isCreaturesAttackValid(CreatureCard[] attackingCreatures) {
+    /**
+     * Checks whether creatures which are going to attack are prepared for fight.
+     * 
+     * @param attackingCreatures array of attacking creatures
+     * @return true if all creatures are able to attack, false if any creature 
+     * has summoning sickness, does not belong to the current player or the 
+     * array contains duplicate creatures.
+     */
+    private boolean testAttackingCreatures(CreatureCard[] attackingCreatures) {
         if (ArrayUtils.hasDuplicatesExceptNull(attackingCreatures)) {
             return false;
         }
@@ -84,13 +91,27 @@ public class GameImpl implements Game {
         CreatureCard[] playerCreatures = getCurrentPlayer().getCreaturesOnTable(); 
         
         for (CreatureCard card : attackingCreatures) {
-            if (card.isTapped()) {
-                return false;
-            }
             if (card.hasSummoningSickness()) {     
                 return false;
             }
             if (!ArrayUtils.containsCard(card, playerCreatures)) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    @Override
+    public boolean isCreaturesAttackValid(CreatureCard[] attackingCreatures) {
+        if (!testAttackingCreatures(attackingCreatures)) {
+            return false;
+        }
+        
+        CreatureCard[] playerCreatures = getCurrentPlayer().getCreaturesOnTable(); 
+        
+        for (CreatureCard card : attackingCreatures) {
+            if (card.isTapped()) {
                 return false;
             }
         }
@@ -103,7 +124,7 @@ public class GameImpl implements Game {
         if (attackingCreatures.length != blockingCreatures.length) {
             return false;
         }
-        if (!isCreaturesAttackValid(attackingCreatures)) {
+        if (!testAttackingCreatures(attackingCreatures)) {
             return false;
         }
         if (ArrayUtils.hasDuplicatesExceptNull(blockingCreatures)) {
