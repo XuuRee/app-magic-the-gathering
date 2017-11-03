@@ -1,4 +1,4 @@
-﻿#Magic the Gathering
+﻿# Magic the Gathering
 
 ## Strutura projektu
 
